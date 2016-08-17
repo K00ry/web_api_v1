@@ -1,0 +1,20 @@
+
+label{
+	@include font-fam-size(1.5em,$main-font-2,bold,$dark-purple-m);
+
+}
+
+input[name="search"]{
+	    border-radius: 40px;
+    width: 60px;
+    margin: auto;
+    transition:$trans-default;
+    &:hover{
+    	width: 100px;
+    }
+
+}
+button{
+margin: auto;
+
+}

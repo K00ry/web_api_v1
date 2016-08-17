@@ -1,0 +1,20 @@
+.main-wrapper {
+    @include flex-display(flex, column, space-between, 80%, center);
+    margin: auto;
+    background-color: $hard-blue-l;
+    .engines {
+        @include flex-display(flex, row, space-around, 100%, center);
+    }
+}
+
+.spotify,
+.flicker {
+    margin: auto;
+    @include flex-display(flex, column, space-between, 50%, center);
+}
+
+.gallery{
+	 @include flex-display(flex, row, space-between, 100%, center);
+	 flex-wrap:wrap;
+
+}

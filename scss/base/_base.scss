@@ -1,0 +1,31 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    text-align: center;
+    font-family: $main-font;
+    color: $text-color;
+    background: $main-background-color;
+}
+
+
+/* Link Styles */
+
+a {
+    text-decoration: none;
+    color: $link-color;
+      &:hover {
+          color: #9968FF;
+      }
+}
+legend{
+  display: none;
+}
+fieldset{
+  border:none;
+  @include flex-display(flex, column, space-around, 100%,center);
+
+}
+
