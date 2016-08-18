@@ -1,16 +1,20 @@
 
 label{
-	@include font-fam-size(1.5em,$main-font-2,bold,$dark-purple-m);
-
+	@include font-fam-size(2em,$main-font-2,bold,$light-blue);
+	margin:20px auto;
 }
 
 input[name="search"]{
 	    border-radius: 40px;
-    width: 60px;
-    margin: auto;
+    width: 20%;
+    height: 40px;
+    margin: 20px auto;
     transition:$trans-default;
-    &:hover{
-    	width: 100px;
+    padding: 10px;
+
+    &:focus{
+    	width: 60%;
+    	outline: none;
     }
 
 }

@@ -1,7 +1,8 @@
 $(document).ready(function() {
 
 
- $('#flickr-submit').click(function () {
+ $('#flickr-submit').click(function (evt) {
+ 	evt.preventDefault();
     // highlight the button
     // not AJAX, just cool looking
    
@@ -15,14 +16,14 @@ $(document).ready(function() {
       format: "json"
     };
     function displayPhotos(data) {
-      var photoHTML = '<ul>';
+      var photoHTML = '<ul class="photos">';
       $.each(data.items,function(i,photo) {
-        photoHTML += '<li class="grid-25 tablet-grid-50">';
-        photoHTML += '<a href="' + photo.link + '" class="image">';
+        photoHTML += '<li class="pics">';
+        photoHTML += '<a href="' + photo.link + '" class="thumbnails">';
         photoHTML += '<img src="' + photo.media.m + '"></a></li>';
       }); // end each
       photoHTML += '</ul>';
-      $('#photos').html(photoHTML);
+      $('.gallery').html(photoHTML);
     }
     $.getJSON(flickerAPI, flickrOptions, displayPhotos);
 
