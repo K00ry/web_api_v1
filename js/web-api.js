@@ -15,7 +15,7 @@ $(document).ready(function() {
 
         var spotifyOptions = {
             q: artist,
-            type: "artist"
+            type: "album"
         }
 
 
@@ -28,42 +28,41 @@ $(document).ready(function() {
 
         function displayPhotos(data) {
 
-
-            var koory = data.artists.items[2].images;
-            var ghoory = data.artists.items;
+            console.log(data);
+            var koory = data.albums.items[2].images;
+            var ghoory = data.albums.items;
 
 
 
             var jasem = [];
-            $.each(data.artists.items, function(i, photo) {
+            $.each(ghoory, function(i, photo) {
                 if (photo.images.length > 0) {
                     var bandInfo = {
                         "id": photo.id,
                         "name": photo.name,
                         "href": photo.href,
-                        "image": photo.images
+                        "image": photo.images[0].url
                     };
                 }
                 jasem.push(bandInfo);
 
             }); // end each
             console.log(jasem);
-            console.log(jasem[0].image["0"].url);
+            // var jakesh = '<img src="'+ jasem[2].image +'">';
+            // $('.gallery').append(jakesh);
+           
 
 
 
             var photoHTML = '<ul class="photos">';
             var i;
-            for (i = 0; i < jasem.length; i++) {
+            //for (i = 0; i < jasem.length; i++) {
+              $.each(jasem,function(index,value){
+                 photoHTML += '<li class="pics">';
+                photoHTML += '<a href="' + value.href+ '" class="thumbnails">';
+                photoHTML += '<img src="' + value.image+ '"></a></li>';
 
-                photoHTML += '<li class="pics">';
-                photoHTML += '<a href="' + jasem[i].href + '" class="thumbnails">';
-                photoHTML += '<img src="' + jasem[i].image["0"].url + '"></a></li>';
-
-            }
-
-
-
+              });  
             photoHTML += '</ul>';
             $('.gallery').html(photoHTML);
 
