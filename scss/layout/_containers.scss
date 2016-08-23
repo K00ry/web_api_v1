@@ -1,20 +1,38 @@
 .main-wrapper {
     @include flex-display(flex, column, space-between, 80%, center);
     margin: auto;
-    background-color: $hard-blue-l;
+    background-color: #fff;
     .engines {
         @include flex-display(flex, row, space-around, 100%, center);
+        padding-bottom: 20px;
+
     }
 }
 
 .spotify,
 .flicker {
     margin: auto;
-    @include flex-display(flex, column, space-between, 50%, center);
+    @include flex-display(flex, column, space-between, 80%, center);
 }
 
 .gallery{
 	 @include flex-display(flex, row, space-between, 100%, center);
-	 flex-wrap:wrap;
+
 
 }
+.photos{
+	@include flex-display(flex, row, space-around, 100%, center);
+	flex-wrap:wrap;
+	padding-top:20px;
+
+
+}
+img{
+	width:220px;
+		height:220px;
+		margin: 20px;
+		border-radius: 20px;
+
+
+}
+

@@ -7,7 +7,7 @@ body {
     text-align: center;
     font-family: $main-font;
     color: $text-color;
-    background: $main-background-color;
+    background: $main-content-color ;
 }
 
 
@@ -26,6 +26,7 @@ legend{
 fieldset{
   border:none;
   @include flex-display(flex, column, space-around, 100%,center);
+ border-bottom:3px solid $dark-purple-l;
 
 }
 
