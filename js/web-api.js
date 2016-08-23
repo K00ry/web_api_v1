@@ -1,41 +1,23 @@
 $(document).ready(function() {
+    var retrieved = [];
+
+
 
 
     $('#flickr-submit').click(function(evt) {
         evt.preventDefault();
-        // highlight the button
-        // not AJAX, just cool looking
-
-
-
-        // the AJAX part
-        //var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
         var spotify_url = "https://api.spotify.com/v1/search";
         var artist = $('#flickr-search').val().toLowerCase();
-
         var spotifyOptions = {
             q: artist,
             type: "album"
-        }
+        };
 
-
-
-        // function displayPhotos(response){
-
-        // 	console.log(response.artists.items[18].images[2].url);
-
-        // };
 
         function displayPhotos(data) {
 
-            console.log(data);
-            var koory = data.albums.items[2].images;
-            var ghoory = data.albums.items;
-
-
-
-            var jasem = [];
-            $.each(ghoory, function(i, photo) {
+            
+            $.each(data.albums.items, function(i, photo) {
                 if (photo.images.length > 0) {
                     var bandInfo = {
                         "id": photo.id,
@@ -43,37 +25,65 @@ $(document).ready(function() {
                         "href": photo.href,
                         "image": photo.images[0].url
                     };
+                    retrieved.push(bandInfo);
                 }
-                jasem.push(bandInfo);
 
             }); // end each
-            console.log(jasem);
-            // var jakesh = '<img src="'+ jasem[2].image +'">';
-            // $('.gallery').append(jakesh);
-           
+
+               function fetchDetails() {
+                $.each(retrieved, function(index, item) {
+                    var url = item.href;
+                    $.getJSON(url)
+                        .done(function(response) {
+                            retrieved[index].details = response;
+                        });
+                });
+            }
+            fetchDetails();
 
 
+            console.log(data);
 
-            var photoHTML = '<ul class="photos">';
-            var i;
-            //for (i = 0; i < jasem.length; i++) {
-              $.each(jasem,function(index,value){
-                 photoHTML += '<li class="pics">';
-                photoHTML += '<a href="' + value.href+ '" class="thumbnails">';
-                photoHTML += '<img src="' + value.image+ '"></a></li>';
-
-              });  
-            photoHTML += '</ul>';
+            var photoHTML = '';
+            //for (i = 0; i < retrieved.length; i++) {
+            $.each(retrieved, function(index, value) {
+                photoHTML += '<div class="photos">';
+                photoHTML += '<img src="' + value.image + '"></div>';
+            });
+            photoHTML += '</div>';
             $('.gallery').html(photoHTML);
-
-
-
-
         }
-
-
-
+        console.log(retrieved);
         $.getJSON(spotify_url, spotifyOptions, displayPhotos);
-
     }); // end click
+
+    // click on pics to open the light gallery
+
+
+
+
+    $('.gallery').on('click', 'img', function() {
+        var chosen_image = $(this).attr("src");
+        var chosen_url = $(this).attr("data-href");
+
+
+        $('.overlay-poster').attr("src", chosen_image);
+
+        $('#overlay').addClass('open');
+
+
+    });
+
+    $('#overlay').click(function() {
+        $('#overlay').removeClass('open');
+
+    });
+
+
+
+
+
+
+
+
 }); // end ready
