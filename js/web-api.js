@@ -1,5 +1,6 @@
 $(document).ready(function() {
     var retrieved = [];
+    var limit = 20;
 
 
 
@@ -10,13 +11,14 @@ $(document).ready(function() {
         var artist = $('#flickr-search').val().toLowerCase();
         var spotifyOptions = {
             q: artist,
-            type: "album"
+            type: "album",
+            limit: limit
         };
 
 
         function displayPhotos(data) {
 
-            
+
             $.each(data.albums.items, function(i, photo) {
                 if (photo.images.length > 0) {
                     var bandInfo = {
@@ -28,55 +30,73 @@ $(document).ready(function() {
                     retrieved.push(bandInfo);
                 }
 
+                function fetchDetails() {
+                    $.each(retrieved, function(index, item) {
+                        var url = item.href;
+                        $.getJSON(url)
+                            .done(function(response) {
+                                retrieved[index].details = response;
+                            });
+                    });
+                }
+                fetchDetails();
+
             }); // end each
-
-               function fetchDetails() {
-                $.each(retrieved, function(index, item) {
-                    var url = item.href;
-                    $.getJSON(url)
-                        .done(function(response) {
-                            retrieved[index].details = response;
-                        });
-                });
-            }
-            fetchDetails();
-
-
-            console.log(data);
-
             var photoHTML = '';
             //for (i = 0; i < retrieved.length; i++) {
             $.each(retrieved, function(index, value) {
                 photoHTML += '<div class="photos">';
-                photoHTML += '<img src="' + value.image + '"></div>';
+                photoHTML += '<img src="' + value.image + '" alt=" '+ value.name+' ">';
+                photoHTML += '</div>';
             });
-            photoHTML += '</div>';
+            
             $('.gallery').html(photoHTML);
         }
         console.log(retrieved);
         $.getJSON(spotify_url, spotifyOptions, displayPhotos);
-    }); // end click
-
-    // click on pics to open the light gallery
 
 
 
-
-    $('.gallery').on('click', 'img', function() {
-        var chosen_image = $(this).attr("src");
-        var chosen_url = $(this).attr("data-href");
+    }); // end submit
 
 
+    ////////////// click on pics to open the light gallery g
+
+
+    
+
+    $('.gallery').on('click', 'div', function() {
+        
+        var clicked_index = $(this).index();
+         var newRetrived = [];
+        $.each(retrieved, function(index, item) {
+                var newRetrivedObject = {
+                    "index": index,
+                    "name_album": item.name,
+                    "name_band": item.details.artists["0"].name,
+                    "release_date" : item.details.release_date,
+                    "tracks_arr" : item.details.tracks,
+                    "poster" : item.details.images["0"].url
+                };
+                newRetrived.push(newRetrivedObject);
+            });
+
+            $('.artist').html('<span>Artist :</span> ' + newRetrived[clicked_index].name_band);
+            $('.album').html('<span>album :</span> ' + newRetrived[clicked_index].name_album);
+            $('.release').html('<span>Release Date :</span> ' + newRetrived[clicked_index].release_date);
+             console.log(newRetrived);
+
+             
+
+         var chosen_image = newRetrived[clicked_index].poster;    
         $('.overlay-poster').attr("src", chosen_image);
+        $('#overlay').addClass('open').css("display","flex");
+    });// end album click
 
-        $('#overlay').addClass('open');
-
-
-    });
+   
 
     $('#overlay').click(function() {
         $('#overlay').removeClass('open');
-
     });
 
 
