@@ -3,6 +3,7 @@ $(document).ready(function() {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  $('#flickr-submit').click(function (evt) {
  	evt.preventDefault();
     // highlight the button
@@ -30,6 +31,8 @@ $(document).ready(function() {
     $.getJSON(flickerAPI, flickrOptions, displayPhotos);
 
      }); // end click
+=======
+>>>>>>> spotify-test
 =======
 >>>>>>> spotify-test
 

@@ -489,6 +489,7 @@ fieldset {
   -webkit-justify-content: space-around;
       -ms-flex-pack: distribute;
           justify-content: space-around;
+<<<<<<< HEAD
   width: 100%;
   -webkit-box-align: center;
   -webkit-align-items: center;
@@ -508,6 +509,8 @@ fieldset {
   -webkit-justify-content: space-around;
       -ms-flex-pack: distribute;
           justify-content: space-around;
+=======
+>>>>>>> spotify-test
   width: 100%;
   -webkit-box-align: center;
   -webkit-align-items: center;
@@ -517,6 +520,7 @@ fieldset {
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
 <<<<<<< HEAD
+<<<<<<< HEAD
   padding-top: 20px; }
 
 img {
@@ -525,6 +529,8 @@ img {
   margin: 20px;
   border-radius: 20px; }
 =======
+=======
+>>>>>>> spotify-test
   padding-top: 10px; }
 
 .photos img {
@@ -579,6 +585,9 @@ img {
       -ms-flex-align: center;
           align-items: center;
   margin: auto; }
+<<<<<<< HEAD
+>>>>>>> spotify-test
+=======
 >>>>>>> spotify-test
 
 .tgl-flip + .tgl-btn {
