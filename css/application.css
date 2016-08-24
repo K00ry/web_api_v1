@@ -394,93 +394,41 @@ legend {
 
 fieldset {
   border: none;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-justify-content: space-around;
-      -ms-flex-pack: distribute;
-          justify-content: space-around;
+  flex-direction: column;
+  justify-content: space-around;
   width: 100%;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   border-bottom: 3px solid rgba(112, 0, 206, 0.2); }
 
 .main-wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-between;
   width: 80%;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   margin: auto;
   background-color: #fff; }
   .main-wrapper .engines {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -webkit-justify-content: space-around;
-        -ms-flex-pack: distribute;
-            justify-content: space-around;
+    flex-direction: row;
+    justify-content: space-around;
     width: 100%;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-        -ms-flex-align: center;
-            align-items: center;
+    align-items: center;
     padding-bottom: 20px; }
 
 .spotify,
 .flicker {
   margin: auto;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-between;
   width: 80%;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center; }
+  align-items: center; }
 
 .gallery {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
+<<<<<<< HEAD
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
@@ -531,12 +479,19 @@ img {
 =======
 =======
 >>>>>>> spotify-test
+=======
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  align-items: center;
+  flex-wrap: wrap;
+>>>>>>> spotify-test
   padding-top: 10px; }
 
 .photos img {
   width: 220px;
   height: 220px;
-  padding: 20px;
+  margin: 20px;
   border-radius: 20px; }
 
 .overlay-contentscale.open {
@@ -544,19 +499,14 @@ img {
   -webkit-transform: translateY(0%);
   transform: translateY(0%);
   -webkit-transition: -webkit-transform 0.5s;
-  transition: -webkit-transform 0.5s;
-  transition: transform 0.5s;
-  transition: transform 0.5s, -webkit-transform 0.5s; }
+  transition: transform 0.5s; }
 
 .overlay-contentscale {
   visibility: hidden;
   -webkit-transform: translateY(100%);
   transform: translateY(100%);
   -webkit-transition: -webkit-transform 0.5s, visibility 0s 0.5s;
-  -webkit-transition: visibility 0s 0.5s, -webkit-transform 0.5s;
-  transition: visibility 0s 0.5s, -webkit-transform 0.5s;
-  transition: transform 0.5s, visibility 0s 0.5s;
-  transition: transform 0.5s, visibility 0s 0.5s, -webkit-transform 0.5s; }
+  transition: transform 0.5s, visibility 0s 0.5s; }
 
 #overlay {
   position: fixed;
@@ -567,24 +517,12 @@ img {
   background: rgba(34, 34, 34, 0.8); }
 
 .overlay-content {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-justify-content: space-around;
-      -ms-flex-pack: distribute;
-          justify-content: space-around;
-  width: 80%;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 90%;
   margin: auto; }
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> spotify-test
 =======
@@ -601,40 +539,30 @@ img {
     display: inline-block;
     -webkit-transition: all .4s ease;
     transition: all .4s ease;
+=======
+  .overlay-content img {
+    width: 50%;
+    height: 80%; }
+  .overlay-content .album-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+>>>>>>> spotify-test
     width: 100%;
-    text-align: center;
-    position: absolute;
-    line-height: 2em;
-    font-weight: bold;
-    color: #fff;
-    position: absolute;
-    top: 0;
-    left: 0;
-    -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-    border-radius: 4px; }
-  .tgl-flip + .tgl-btn:after {
-    content: attr(data-tg-on);
-    background: #02C66F;
-    -webkit-transform: rotateY(-180deg);
-            transform: rotateY(-180deg); }
-  .tgl-flip + .tgl-btn:before {
-    background: #FF3A19;
-    content: attr(data-tg-off); }
-  .tgl-flip + .tgl-btn:active:before {
-    -webkit-transform: rotateY(-20deg);
-            transform: rotateY(-20deg); }
-.tgl-flip:checked + .tgl-btn:before {
-  -webkit-transform: rotateY(180deg);
-          transform: rotateY(180deg); }
-.tgl-flip:checked + .tgl-btn:after {
-  -webkit-transform: rotateY(0);
-          transform: rotateY(0);
-  left: 0;
-  background: #7FC6A6; }
-.tgl-flip:checked + .tgl-btn:active:after {
-  -webkit-transform: rotateY(20deg);
-          transform: rotateY(20deg); }
+    align-items: flex-start; }
+    .overlay-content .album-info h1,
+    .overlay-content .album-info h2,
+    .overlay-content .album-info h3 {
+      margin: 6px 0;
+      float: left;
+      color: #EBB301; }
+      .overlay-content .album-info h1 span,
+      .overlay-content .album-info h2 span,
+      .overlay-content .album-info h3 span {
+        color: #7000CE; }
+
+.overlay-close {
+  display: none; }
 
 label {
   font-size: 2em;
@@ -648,7 +576,6 @@ input[name="search"] {
   width: 20%;
   height: 40px;
   margin: 20px auto;
-  -webkit-transition: all 1s;
   transition: all 1s;
   padding: 10px; }
   input[name="search"]:focus {
