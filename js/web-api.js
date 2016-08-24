@@ -5,7 +5,12 @@ $(document).ready(function() {
 
 
 
+
+
+
     $('#flickr-submit').click(function(evt) {
+
+        //////////////// spotify request\\\\\\\\\\\
         evt.preventDefault();
         var spotify_url = "https://api.spotify.com/v1/search";
         var artist = $('#flickr-search').val().toLowerCase();
@@ -42,6 +47,30 @@ $(document).ready(function() {
                 fetchDetails();
 
             }); // end each
+
+            /////////////// twitter request \\\\\\\\\\\
+
+            var twitter_url = "https://search.twitter.com/search.json?";
+        var artist_tweets = $('#flickr-search').val().toLowerCase();
+        var twitterOptions = {
+            q: artist_tweets,
+            type: "json",
+            limit: limit
+        };
+            function displayTweets(data){
+                console.log(data)
+
+
+            }
+            $.getJSON(twitter_url,twitterOptions,displayTweets);
+
+
+
+
+
+
+
+            /// gallery build up
             var photoHTML = '';
             //for (i = 0; i < retrieved.length; i++) {
             $.each(retrieved, function(index, value) {
