@@ -466,12 +466,17 @@ fieldset {
 .overlay-content {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  width: 90%;
-  margin: auto; }
-  .overlay-content img {
-    width: 50%;
+  justify-content: space-between;
+  width: 90%; }
+  .overlay-content .content-holder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
     height: 80%; }
+  .overlay-content img {
+    width: 400px;
+    height: 400px; }
   .overlay-content .album-info {
     display: flex;
     flex-direction: column;
@@ -489,8 +494,52 @@ fieldset {
       .overlay-content .album-info h3 span {
         color: #7000CE; }
 
-.overlay-close {
-  display: none; }
+.table {
+  width: 50%; }
+  .table table {
+    width: 100%; }
+    .table table tr td {
+      color: yellow;
+      float: left;
+      border-bottom: 2px solid #fff;
+      font-size: 1.1em; }
+
+.tgl-flip + .tgl-btn {
+  padding: 2px;
+  transition: all .2s ease;
+  font-family: sans-serif;
+  perspective: 100px; }
+  .tgl-flip + .tgl-btn:after, .tgl-flip + .tgl-btn:before {
+    display: inline-block;
+    transition: all .4s ease;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    line-height: 2em;
+    font-weight: bold;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    border-radius: 4px; }
+  .tgl-flip + .tgl-btn:after {
+    content: attr(data-tg-on);
+    background: #02C66F;
+    transform: rotateY(-180deg); }
+  .tgl-flip + .tgl-btn:before {
+    background: #FF3A19;
+    content: attr(data-tg-off); }
+  .tgl-flip + .tgl-btn:active:before {
+    transform: rotateY(-20deg); }
+.tgl-flip:checked + .tgl-btn:before {
+  transform: rotateY(180deg); }
+.tgl-flip:checked + .tgl-btn:after {
+  transform: rotateY(0);
+  left: 0;
+  background: #7FC6A6; }
+.tgl-flip:checked + .tgl-btn:active:after {
+  transform: rotateY(20deg); }
 
 label {
   font-size: 2em;

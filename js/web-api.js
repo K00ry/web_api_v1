@@ -46,10 +46,10 @@ $(document).ready(function() {
             //for (i = 0; i < retrieved.length; i++) {
             $.each(retrieved, function(index, value) {
                 photoHTML += '<div class="photos">';
-                photoHTML += '<img src="' + value.image + '" alt=" '+ value.name+' ">';
+                photoHTML += '<img src="' + value.image + '" alt=" ' + value.name + ' ">';
                 photoHTML += '</div>';
             });
-            
+
             $('.gallery').html(photoHTML);
         }
         console.log(retrieved);
@@ -60,40 +60,51 @@ $(document).ready(function() {
     }); // end submit
 
 
-    ////////////// click on pics to open the light gallery g
+    ////////////// click on pics to open the light gallery 
 
 
-    
+
 
     $('.gallery').on('click', 'div', function() {
-        
+
         var clicked_index = $(this).index();
-         var newRetrived = [];
+        var newRetrived = [];
         $.each(retrieved, function(index, item) {
-                var newRetrivedObject = {
-                    "index": index,
-                    "name_album": item.name,
-                    "name_band": item.details.artists["0"].name,
-                    "release_date" : item.details.release_date,
-                    "tracks_arr" : item.details.tracks,
-                    "poster" : item.details.images["0"].url
-                };
-                newRetrived.push(newRetrivedObject);
+            var newRetrivedObject = {
+                "index": index,
+                "name_album": item.name,
+                "name_band": item.details.artists["0"].name,
+                "release_date": item.details.release_date,
+                "tracks_arr": item.details.tracks,
+                "poster": item.details.images["0"].url
+            };
+            newRetrived.push(newRetrivedObject);
+        });
+
+        $('.artist').html('<span>Artist :</span> ' + newRetrived[clicked_index].name_band);
+        $('.album').html('<span>album :</span> ' + newRetrived[clicked_index].name_album);
+        $('.release').html('<span>Release Date :</span> ' + newRetrived[clicked_index].release_date);
+        console.log(newRetrived);
+
+        function tableMaker(rightIndex) {
+            var table = '<table>';
+            $.each(newRetrived[rightIndex].tracks_arr.items, function(index, item) {
+                table += '<tr><td>' + item.track_number + '. ' + item.name + '</td></tr>';
+
             });
+            table += '</table>';
+            $('.table').append(table);
+        }
+        tableMaker(clicked_index);
+        console.log(newRetrived[clicked_index].tracks_arr.items);
 
-            $('.artist').html('<span>Artist :</span> ' + newRetrived[clicked_index].name_band);
-            $('.album').html('<span>album :</span> ' + newRetrived[clicked_index].name_album);
-            $('.release').html('<span>Release Date :</span> ' + newRetrived[clicked_index].release_date);
-             console.log(newRetrived);
 
-             
-
-         var chosen_image = newRetrived[clicked_index].poster;    
+        var chosen_image = newRetrived[clicked_index].poster;
         $('.overlay-poster').attr("src", chosen_image);
-        $('#overlay').addClass('open').css("display","flex");
-    });// end album click
+        $('#overlay').addClass('open').css("display", "flex");
+    }); // end album click
 
-   
+
 
     $('#overlay').click(function() {
         $('#overlay').removeClass('open');
