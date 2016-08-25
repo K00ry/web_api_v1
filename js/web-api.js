@@ -84,6 +84,10 @@ $(document).ready(function() {
         console.log(retrieved);
         $.getJSON(spotify_url, spotifyOptions, displayPhotos);
 
+<<<<<<< HEAD
+    // click on pics to open the light gallery g
+=======
+>>>>>>> spotify-test
 
 
     }); // end submit

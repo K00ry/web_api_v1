@@ -428,11 +428,64 @@ fieldset {
 
 .gallery {
   display: flex;
+<<<<<<< HEAD
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+<<<<<<< HEAD
+  width: 100%;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center; }
+
+.photos {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+=======
+>>>>>>> spotify-test
+  width: 100%;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+<<<<<<< HEAD
+<<<<<<< HEAD
+  padding-top: 20px; }
+
+img {
+  width: 220px;
+  height: 220px;
+  margin: 20px;
+  border-radius: 20px; }
+=======
+=======
+>>>>>>> spotify-test
+=======
   flex-direction: row;
   justify-content: space-around;
   width: 100%;
   align-items: center;
   flex-wrap: wrap;
+>>>>>>> spotify-test
   padding-top: 10px; }
 
 .photos img {
@@ -469,6 +522,24 @@ fieldset {
   justify-content: space-around;
   width: 90%;
   margin: auto; }
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> spotify-test
+=======
+>>>>>>> spotify-test
+
+.tgl-flip + .tgl-btn {
+  padding: 2px;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+  font-family: sans-serif;
+  -webkit-perspective: 100px;
+          perspective: 100px; }
+  .tgl-flip + .tgl-btn:after, .tgl-flip + .tgl-btn:before {
+    display: inline-block;
+    -webkit-transition: all .4s ease;
+    transition: all .4s ease;
+=======
   .overlay-content img {
     width: 50%;
     height: 80%; }
@@ -476,6 +547,7 @@ fieldset {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+>>>>>>> spotify-test
     width: 100%;
     align-items: flex-start; }
     .overlay-content .album-info h1,
