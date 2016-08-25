@@ -1,23 +1,34 @@
 $(document).ready(function() {
+
+    var newRetrived = [];
+    var limit = 10;
     var retrieved = [];
-    var limit = 20;
+
+
+
+
 
 
 
 
     $('#flickr-submit').click(function(evt) {
         evt.preventDefault();
+        $('.gallery').empty();
+        retrieved = [];
+        var artist = $('#flickr-search').val().split(" ").join("+");
+
+
         var spotify_url = "https://api.spotify.com/v1/search";
-        var artist = $('#flickr-search').val().toLowerCase();
+
+
         var spotifyOptions = {
             q: artist,
             type: "album",
             limit: limit
         };
-
+     
 
         function displayPhotos(data) {
-
 
             $.each(data.albums.items, function(i, photo) {
                 if (photo.images.length > 0) {
@@ -30,45 +41,82 @@ $(document).ready(function() {
                     retrieved.push(bandInfo);
                 }
 
-                function fetchDetails() {
-                    $.each(retrieved, function(index, item) {
-                        var url = item.href;
-                        $.getJSON(url)
-                            .done(function(response) {
-                                retrieved[index].details = response;
-                            });
-                    });
-                }
-                fetchDetails();
-
             }); // end each
-            var photoHTML = '';
-            //for (i = 0; i < retrieved.length; i++) {
-            $.each(retrieved, function(index, value) {
-                photoHTML += '<div class="photos">';
-                photoHTML += '<img src="' + value.image + '" alt=" ' + value.name + ' ">';
-                photoHTML += '</div>';
-            });
 
-            $('.gallery').html(photoHTML);
+            fetchDetails(retrieved);
+
+            galleryBuilt();
         }
-        console.log(retrieved);
+
         $.getJSON(spotify_url, spotifyOptions, displayPhotos);
+
+
+
+
+
+
+
+
+
+
+
 
 
 
     }); // end submit
 
+    //$('.gallery').empty();
 
-    ////////////// click on pics to open the light gallery 
+    ////////////// FUNCTIONS \\\\\\\\\\\\\\\
+
+    function galleryBuilt() {
+
+        var photoHTML = '';
+        $.each(retrieved, function(index, value) {
+            photoHTML += '<div class="photos">';
+            photoHTML += '<img src="' + value.image + '" alt=" ' + value.name + ' ">';
+            photoHTML += '</div>';
+        });
+
+        $('.gallery').append(photoHTML);
+    }
 
 
+    function fetchDetails(got) {
+        $.each(got, function(index, item) {
+            var url = item.href;
+            $.getJSON(url)
+                .done(function(response) {
+                    retrieved[index].details = response;
+                });
+        });
+    }
+
+    function rightPoster(rightIndex) {
+        $('.overlay-poster').attr("src", newRetrived[rightIndex].poster);
+    }
 
 
-    $('.gallery').on('click', 'div', function() {
+    function albumInfo(rightIndex) {
+        $('.artist').html('<span>Artist :</span> ' + newRetrived[rightIndex].name_band);
+        $('.album').html('<span>album :</span> ' + newRetrived[rightIndex].name_album);
+        $('.release').html('<span>Release Date :</span> ' + newRetrived[rightIndex].release_date);
+    }
+    // function to make a table of tracks by the artist
 
-        var clicked_index = $(this).index();
-        var newRetrived = [];
+    function tableMaker(rightIndex) {
+        var table = '';
+        $.each(newRetrived[rightIndex].tracks_arr.items, function(index, item) {
+            table += '<tr><td>' + item.track_number + '. ' + item.name + '</td></tr>';
+
+        });
+        $('.replace-table').html(table);
+    }
+
+
+    // function to  make a new array with updated json
+
+    function usableInfo() {
         $.each(retrieved, function(index, item) {
             var newRetrivedObject = {
                 "index": index,
@@ -80,37 +128,78 @@ $(document).ready(function() {
             };
             newRetrived.push(newRetrivedObject);
         });
+    }
 
-        $('.artist').html('<span>Artist :</span> ' + newRetrived[clicked_index].name_band);
-        $('.album').html('<span>album :</span> ' + newRetrived[clicked_index].name_album);
-        $('.release').html('<span>Release Date :</span> ' + newRetrived[clicked_index].release_date);
-        console.log(newRetrived);
 
-        function tableMaker(rightIndex) {
-            var table = '<table>';
-            $.each(newRetrived[rightIndex].tracks_arr.items, function(index, item) {
-                table += '<tr><td>' + item.track_number + '. ' + item.name + '</td></tr>';
 
-            });
-            table += '</table>';
-            $('.table').append(table);
-        }
+
+
+
+
+
+    ////////////// click on pics to open the light gallery \\\\\\\\\\\
+    var clicked_index;
+
+
+    $('.gallery').on('click', 'div', function() {
+
+        clicked_index = $(this).index();
+        usableInfo();
+        albumInfo(clicked_index);
         tableMaker(clicked_index);
-        console.log(newRetrived[clicked_index].tracks_arr.items);
+        rightPoster(clicked_index);
 
-
-        var chosen_image = newRetrived[clicked_index].poster;
-        $('.overlay-poster').attr("src", chosen_image);
         $('#overlay').addClass('open').css("display", "flex");
+
+
     }); // end album click
 
 
 
+
+
+
+
     $('#overlay').click(function() {
+
         $('#overlay').removeClass('open');
+
+    });
+
+    ////////////// left and right arrows \\\\\\\\\\\\\\
+
+    $('.left-arrow').click(function(evt) {
+        evt.stopPropagation();
+
+
+        if (clicked_index > 0) {
+            clicked_index -= 1;
+            albumInfo(clicked_index);
+            tableMaker(clicked_index);
+            rightPoster(clicked_index);
+        } else if (clicked_index === 0) {
+            clicked_index = 19;
+            albumInfo(clicked_index);
+            tableMaker(clicked_index);
+            rightPoster(clicked_index);
+        }
     });
 
 
+    $('.right-arrow').click(function(evt) {
+        evt.stopPropagation();
+        if (clicked_index <= 18) {
+            clicked_index += 1;
+            albumInfo(clicked_index);
+            tableMaker(clicked_index);
+            rightPoster(clicked_index);
+        } else if (clicked_index === 19) {
+            clicked_index = 0;
+            albumInfo(clicked_index);
+            tableMaker(clicked_index);
+            rightPoster(clicked_index);
+        }
+    });
 
 
 
