@@ -178,7 +178,7 @@ $(document).ready(function() {
             tableMaker(clicked_index);
             rightPoster(clicked_index);
         } else if (clicked_index === 0) {
-            clicked_index = 19;
+            clicked_index = 9;
             albumInfo(clicked_index);
             tableMaker(clicked_index);
             rightPoster(clicked_index);
@@ -188,12 +188,12 @@ $(document).ready(function() {
 
     $('.right-arrow').click(function(evt) {
         evt.stopPropagation();
-        if (clicked_index <= 18) {
+        if (clicked_index <= 8) {
             clicked_index += 1;
             albumInfo(clicked_index);
             tableMaker(clicked_index);
             rightPoster(clicked_index);
-        } else if (clicked_index === 19) {
+        } else if (clicked_index === 9) {
             clicked_index = 0;
             albumInfo(clicked_index);
             tableMaker(clicked_index);
