@@ -45,29 +45,19 @@ $(document).ready(function() {
 
             fetchDetails(retrieved);
 
+            console.log(retrieved);
+
             galleryBuilt();
         }
 
         $.getJSON(spotify_url, spotifyOptions, displayPhotos);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     }); // end submit
 
     //$('.gallery').empty();
 
-    ////////////// FUNCTIONS \\\\\\\\\\\\\\\
+ //-------////////////// FUNCTIONS \\\\\\\\\\\\\\\----------\\
 
     function galleryBuilt() {
 
