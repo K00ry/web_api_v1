@@ -40,32 +40,76 @@ $(document).ready(function() {
 
             fetchDetails(retrieved);
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 
             console.log(retrieved);
 
+=======
+>>>>>>> flicr-test
+=======
+>>>>>>> flicr-test
+=======
+>>>>>>> flicr-test
 =======
 >>>>>>> flicr-test
             galleryBuilt();
         }
 
         $.getJSON(spotify_url, spotifyOptions, displayAlbums);
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> flicr-test
+=======
+>>>>>>> flicr-test
 
 
 <<<<<<< HEAD
     }); // end submit
 =======
+=======
+>>>>>>> flicr-test
 
 
 
     }); // end submit
 
 
+    }); // end submit
 
     ////////////// FUNCTIONS \\\\\\\\\\\\\\\
 
 
+    ////////////// FUNCTIONS \\\\\\\\\\\\\\\
 
 
+    //// flickr call 
+
+    function FlickrCall(tag) {
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> flicr-test
+=======
+>>>>>>> flicr-test
+        var flickr_url = "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+        var flickrOptions = {
+            tags: tag,
+            tagmode: "any",
+            format: "json"
+            
+        };
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+        function displayPhotos(response) {
+
+=======
     //// flickr call 
 
     function FlickrCall(tag) {
@@ -77,6 +121,38 @@ $(document).ready(function() {
             format: "json"
             
         };
+
+        function displayPhotos(response) {
+
+>>>>>>> flicr-test
+            console.log(response.items);
+            var flickrPhotos = '';
+            $.each(response.items, function(index, item) {
+                 if (index === 5){
+                    return false;
+                }
+                flickrPhotos += '<div class="flickr-photos">';
+                flickrPhotos += '<img src=" ' + item.media.m + ' " alt=" ' + item.media.tags + ' ">';
+                flickrPhotos += '</div>';
+
+            }); //end each
+            $(".flickr-show").html(flickrPhotos);
+        } // end function
+        $.getJSON(flickr_url, flickrOptions, displayPhotos);
+    }
+<<<<<<< HEAD
+>>>>>>> flicr-test
+
+
+<<<<<<< HEAD
+ //-------////////////// FUNCTIONS \\\\\\\\\\\\\\\----------\\
+=======
+>>>>>>> flicr-test
+=======
+
+
+>>>>>>> flicr-test
+=======
 
         function displayPhotos(response) {
 
@@ -95,12 +171,30 @@ $(document).ready(function() {
         } // end function
         $.getJSON(flickr_url, flickrOptions, displayPhotos);
     }
+
+
 >>>>>>> flicr-test
-
-
-<<<<<<< HEAD
- //-------////////////// FUNCTIONS \\\\\\\\\\\\\\\----------\\
 =======
+
+        function displayPhotos(response) {
+
+            console.log(response.items);
+            var flickrPhotos = '';
+            $.each(response.items, function(index, item) {
+                 if (index === 5){
+                    return false;
+                }
+                flickrPhotos += '<div class="flickr-photos">';
+                flickrPhotos += '<img src=" ' + item.media.m + ' " alt=" ' + item.media.tags + ' ">';
+                flickrPhotos += '</div>';
+
+            }); //end each
+            $(".flickr-show").html(flickrPhotos);
+        } // end function
+        $.getJSON(flickr_url, flickrOptions, displayPhotos);
+    }
+
+
 >>>>>>> flicr-test
 
     function galleryBuilt() {
