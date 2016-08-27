@@ -71,7 +71,7 @@ $(document).ready(function() {
 
         function displayPhotos(response) {
 
-            console.log(response.items);
+            
             var flickrPhotos = '';
             $.each(response.items, function(index, item) {
                  if (index === 5){
@@ -82,7 +82,7 @@ $(document).ready(function() {
                 flickrPhotos += '</div>';
 
             }); //end each
-            $(".flickr-show").html(flickrPhotos);
+            $(".flickr-show").hide().html(flickrPhotos).fadeIn('slow');
         } // end function
         $.getJSON(flickr_url, flickrOptions, displayPhotos);
     }
@@ -98,7 +98,7 @@ $(document).ready(function() {
             photoHTML += '</div>';
         });
 
-        $('.gallery').append(photoHTML);
+        $('.gallery').hide().html(photoHTML).fadeIn('slow');
     }
 
 
@@ -164,10 +164,10 @@ $(document).ready(function() {
     $('.gallery').on('click', 'div', function() {
 
         clicked_index = $(this).index();
-
-        var flickr_albumCovers = retrieved[clicked_index].name;
-        console.dir(flickr_albumCovers);
-        FlickrCall(flickr_albumCovers);
+        newRetrived = [];
+        
+        
+        FlickrCall(retrieved[clicked_index].name);
         usableInfo();
         albumInfo(clicked_index);
         tableMaker(clicked_index);
@@ -198,11 +198,13 @@ $(document).ready(function() {
 
         if (clicked_index > 0) {
             clicked_index -= 1;
+            FlickrCall(retrieved[clicked_index].name);
             albumInfo(clicked_index);
             tableMaker(clicked_index);
             rightPoster(clicked_index);
         } else if (clicked_index === 0) {
             clicked_index = 9;
+            FlickrCall(retrieved[clicked_index].name);
             albumInfo(clicked_index);
             tableMaker(clicked_index);
             rightPoster(clicked_index);
@@ -214,11 +216,13 @@ $(document).ready(function() {
         evt.stopPropagation();
         if (clicked_index <= 8) {
             clicked_index += 1;
+            FlickrCall(retrieved[clicked_index].name);
             albumInfo(clicked_index);
             tableMaker(clicked_index);
             rightPoster(clicked_index);
         } else if (clicked_index === 9) {
             clicked_index = 0;
+            FlickrCall(retrieved[clicked_index].name);
             albumInfo(clicked_index);
             tableMaker(clicked_index);
             rightPoster(clicked_index);

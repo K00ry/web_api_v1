@@ -476,8 +476,9 @@ fieldset {
     justify-content: space-between;
     width: 100%; }
     .overlay-content .flickr-show .flickr-photos img {
-      width: 200px;
-      height: 200px; }
+      width: 180px;
+      height: 180px;
+      border-radius: 20px; }
   .overlay-content .content-holder {
     display: flex;
     flex-direction: row;
