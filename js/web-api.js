@@ -64,17 +64,23 @@ $(document).ready(function() {
         var flickr_url = "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
         var flickrOptions = {
             tags: tag,
-            format: "json",
-            limit: 6
+            tagmode: "any",
+            format: "json"
+            
         };
 
         function displayPhotos(response) {
+
             console.log(response.items);
             var flickrPhotos = '';
             $.each(response.items, function(index, item) {
+                 if (index === 5){
+                    return false;
+                }
                 flickrPhotos += '<div class="flickr-photos">';
                 flickrPhotos += '<img src=" ' + item.media.m + ' " alt=" ' + item.media.tags + ' ">';
                 flickrPhotos += '</div>';
+
             }); //end each
             $(".flickr-show").html(flickrPhotos);
         } // end function
