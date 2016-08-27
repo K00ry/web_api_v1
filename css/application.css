@@ -435,7 +435,7 @@ fieldset {
   flex-wrap: wrap;
   padding-top: 10px; }
 
-.photos img {
+.covers img {
   width: 220px;
   height: 220px;
   margin: 20px;
@@ -470,6 +470,14 @@ fieldset {
   justify-content: space-between;
   width: 90%;
   margin: auto; }
+  .overlay-content .flickr-show {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%; }
+    .overlay-content .flickr-show .flickr-photos img {
+      width: 200px;
+      height: 200px; }
   .overlay-content .content-holder {
     display: flex;
     flex-direction: row;
