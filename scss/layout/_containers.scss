@@ -20,7 +20,7 @@
     padding-top: 10px;
 }
 
-.photos {
+.covers {
     img {
         width: 220px;
         height: 220px;
@@ -59,19 +59,22 @@
 .overlay-content {
     @include flex-display(flex, column, space-between, 90%);
     margin: auto;
-    .content-holder{
+    .flickr-show {
+        @include flex-display(flex, row, space-between, 100%);
+        .flickr-photos {
+            img {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    }
+    .content-holder {
         @include flex-display(flex, row, space-between, 100%);
         height: 80%;
-
-
     }
-    
-   
     img {
         width: 400px;
         height: 400px;
-        
-        
     }
     .album-info {
         @include flex-display(flex, column, space-around, 100%, flex-start);
@@ -90,13 +93,10 @@
 
 .table {
     width: 50%;
-    
     table {
         width: 100%;
         text-align: left;
         tr {
-            
-            
             td {
                 width: 100%;
                 color: yellow;

@@ -16,19 +16,14 @@ $(document).ready(function() {
         $('.gallery').empty();
         retrieved = [];
         var artist = $('#flickr-search').val().split(" ").join("+");
-
-
         var spotify_url = "https://api.spotify.com/v1/search";
-
-
         var spotifyOptions = {
             q: artist,
             type: "album",
             limit: limit
         };
-     
 
-        function displayPhotos(data) {
+        function displayAlbums(data) {
 
             $.each(data.albums.items, function(i, photo) {
                 if (photo.images.length > 0) {
@@ -39,25 +34,15 @@ $(document).ready(function() {
                         "image": photo.images[0].url
                     };
                     retrieved.push(bandInfo);
-                }
 
+                }
             }); // end each
 
             fetchDetails(retrieved);
-
             galleryBuilt();
         }
 
-        $.getJSON(spotify_url, spotifyOptions, displayPhotos);
-
-
-
-
-
-
-
-
-
+        $.getJSON(spotify_url, spotifyOptions, displayAlbums);
 
 
 
@@ -65,15 +50,44 @@ $(document).ready(function() {
 
     }); // end submit
 
-    //$('.gallery').empty();
+
 
     ////////////// FUNCTIONS \\\\\\\\\\\\\\\
+
+
+
+
+    //// flickr call 
+
+    function FlickrCall(tag) {
+
+        var flickr_url = "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+        var flickrOptions = {
+            tags: tag,
+            format: "json",
+            limit: 6
+        };
+
+        function displayPhotos(response) {
+            console.log(response.items);
+            var flickrPhotos = '';
+            $.each(response.items, function(index, item) {
+                flickrPhotos += '<div class="flickr-photos">';
+                flickrPhotos += '<img src=" ' + item.media.m + ' " alt=" ' + item.media.tags + ' ">';
+                flickrPhotos += '</div>';
+            }); //end each
+            $(".flickr-show").html(flickrPhotos);
+        } // end function
+        $.getJSON(flickr_url, flickrOptions, displayPhotos);
+    }
+
+
 
     function galleryBuilt() {
 
         var photoHTML = '';
         $.each(retrieved, function(index, value) {
-            photoHTML += '<div class="photos">';
+            photoHTML += '<div class="covers">';
             photoHTML += '<img src="' + value.image + '" alt=" ' + value.name + ' ">';
             photoHTML += '</div>';
         });
@@ -144,6 +158,10 @@ $(document).ready(function() {
     $('.gallery').on('click', 'div', function() {
 
         clicked_index = $(this).index();
+
+        var flickr_albumCovers = retrieved[clicked_index].name;
+        console.dir(flickr_albumCovers);
+        FlickrCall(flickr_albumCovers);
         usableInfo();
         albumInfo(clicked_index);
         tableMaker(clicked_index);
