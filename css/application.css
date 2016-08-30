@@ -518,6 +518,10 @@ fieldset {
       font-size: 1.1em;
       margin-bottom: 4px; }
 
+.sort {
+  display: none;
+  justify-content: space-between; }
+
 .left-arrow, .right-arrow {
   color: #fff;
   font-size: 4em;

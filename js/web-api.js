@@ -1,15 +1,9 @@
 $(document).ready(function() {
 
-    var newRetrived = [];
+
     var limit = 10;
     var retrieved = [];
-
-
-
-
-
-
-
+    var newRetrived = [];
 
     $('#flickr-submit').click(function(evt) {
         evt.preventDefault();
@@ -23,7 +17,10 @@ $(document).ready(function() {
             limit: limit
         };
 
-        function displayAlbums(data) {
+
+
+
+        $.getJSON(spotify_url, spotifyOptions).done(function(data) {
 
             $.each(data.albums.items, function(i, photo) {
                 if (photo.images.length > 0) {
@@ -34,21 +31,28 @@ $(document).ready(function() {
                         "image": photo.images[0].url
                     };
                     retrieved.push(bandInfo);
+                    fetchDetails(retrieved);
 
                 }
+
             }); // end each
+            //
+            $('.covers').removeAttr('data-created');
 
-            fetchDetails(retrieved);
-            galleryBuilt();
-        }
-
-        $.getJSON(spotify_url, spotifyOptions, displayAlbums);
+            galleryBuilt(retrieved);
 
 
+        });
 
 
+
+
+
+        $('.sort').css("display", "flex");
 
     }); // end submit
+
+
 
 
 
@@ -59,42 +63,50 @@ $(document).ready(function() {
 
     //// flickr call 
 
-    function FlickrCall(tag) {
+    function flickrCall(tag) {
 
         var flickr_url = "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
         var flickrOptions = {
             tags: tag,
             tagmode: "any",
             format: "json"
-            
         };
 
         function displayPhotos(response) {
-
-            
             var flickrPhotos = '';
             $.each(response.items, function(index, item) {
-                 if (index === 5){
+                if (index === 5) {
                     return false;
                 }
                 flickrPhotos += '<div class="flickr-photos">';
                 flickrPhotos += '<img src=" ' + item.media.m + ' " alt=" ' + item.media.tags + ' ">';
                 flickrPhotos += '</div>';
-
             }); //end each
             $(".flickr-show").hide().html(flickrPhotos).fadeIn('slow');
         } // end function
         $.getJSON(flickr_url, flickrOptions, displayPhotos);
     }
 
+    // function for building the gallery items 
 
-
-    function galleryBuilt() {
-
+    function galleryBuilt(array) {
+        $(".gallery").empty();
         var photoHTML = '';
-        $.each(retrieved, function(index, value) {
+        $.each(array, function(index, value) {
             photoHTML += '<div class="covers">';
-            photoHTML += '<img src="' + value.image + '" alt=" ' + value.name + ' ">';
+            photoHTML += '<img src="' + value.image + '" alt=" ' + value.name + '">';
+            photoHTML += '</div>';
+        });
+
+        $('.gallery').hide().html(photoHTML).fadeIn('slow');
+    }
+
+    function gallerySortBuilt(array) {
+        $(".gallery").empty();
+        var photoHTML = '';
+        $.each(array, function(index, value) {
+            photoHTML += '<div class="covers">';
+            photoHTML += '<img src="' + value.poster + '" alt=" ' + value.name_album + '">';
             photoHTML += '</div>';
         });
 
@@ -113,14 +125,17 @@ $(document).ready(function() {
     }
 
     function rightPoster(rightIndex) {
-        $('.overlay-poster').attr("src", newRetrived[rightIndex].poster);
+        $('.overlay-poster').attr({
+            src: newRetrived[rightIndex].poster,
+            alt: newRetrived[rightIndex].release_date
+        }).hide().fadeIn();
     }
 
 
     function albumInfo(rightIndex) {
-        $('.artist').html('<span>Artist :</span> ' + newRetrived[rightIndex].name_band);
-        $('.album').html('<span>album :</span> ' + newRetrived[rightIndex].name_album);
-        $('.release').html('<span>Release Date :</span> ' + newRetrived[rightIndex].release_date);
+        $('.artist').hide().html('<span>Artist :</span> ' + newRetrived[rightIndex].name_band).fadeIn();
+        $('.album').hide().html('<span>album :</span> ' + newRetrived[rightIndex].name_album).fadeIn();
+        $('.release').hide().html('<span>Release Date :</span> ' + newRetrived[rightIndex].release_date).fadeIn();
     }
     // function to make a table of tracks by the artist
 
@@ -130,14 +145,14 @@ $(document).ready(function() {
             table += '<tr><td>' + item.track_number + '. ' + item.name + '</td></tr>';
 
         });
-        $('.replace-table').html(table);
+        $('.replace-table').hide().html(table).fadeIn();
     }
 
 
     // function to  make a new array with updated json
 
-    function usableInfo() {
-        $.each(retrieved, function(index, item) {
+    function usableInfo(array) {
+        $.each(array, function(index, item) {
             var newRetrivedObject = {
                 "index": index,
                 "name_album": item.name,
@@ -148,6 +163,25 @@ $(document).ready(function() {
             };
             newRetrived.push(newRetrivedObject);
         });
+
+    }
+
+    function sortRetrieved() {
+        newRetrived.sort(function(a, b) {
+            return parseFloat(a.release_date) - parseFloat(b.release_date);
+        });
+    }
+
+
+
+
+    // function for all the change in overlay for the clicks 
+
+    function rotate(rightIndex) {
+        flickrCall(retrieved[rightIndex].name);
+        albumInfo(rightIndex);
+        tableMaker(rightIndex);
+        rightPoster(rightIndex);
     }
 
 
@@ -156,37 +190,47 @@ $(document).ready(function() {
 
 
 
+    ////////////// click on pics to open the light gallery  \\\\\\\\\\\
 
-    ////////////// click on pics to open the light gallery \\\\\\\\\\\
     var clicked_index;
-
-
+    var sorted_index;
     $('.gallery').on('click', 'div', function() {
 
-        clicked_index = $(this).index();
-        newRetrived = [];
-        
-        
-        FlickrCall(retrieved[clicked_index].name);
-        usableInfo();
-        albumInfo(clicked_index);
-        tableMaker(clicked_index);
-        rightPoster(clicked_index);
+        var attr = $(this).attr('data-created');
+        if (typeof attr !== typeof undefined && attr !== false) {
+            sorted_index = $(this).attr("data-created");
+            
+            
+
+            flickrCall(newRetrived[sorted_index].name_album);
+            albumInfo(sorted_index);
+            tableMaker(sorted_index);
+            rightPoster(sorted_index);
+        } else {
+            clicked_index = $(this).index();
+            newRetrived = [];
+            flickrCall(retrieved[clicked_index].name);
+            usableInfo(retrieved);
+            albumInfo(clicked_index);
+            tableMaker(clicked_index);
+            rightPoster(clicked_index);
+
+        }
 
         $('#overlay').addClass('open').css("display", "flex");
-
 
     }); // end album click
 
 
 
 
-
-
-
+    // click to close the over lay
     $('#overlay').click(function() {
 
         $('#overlay').removeClass('open');
+         clicked_index = undefined;
+    sorted_index = undefined;
+
 
     });
 
@@ -194,40 +238,66 @@ $(document).ready(function() {
 
     $('.left-arrow').click(function(evt) {
         evt.stopPropagation();
+        var galleryLength = $('.gallery').children().length;
 
 
-        if (clicked_index > 0) {
+        if (sorted_index === undefined && clicked_index > 0) {
             clicked_index -= 1;
-            FlickrCall(retrieved[clicked_index].name);
-            albumInfo(clicked_index);
-            tableMaker(clicked_index);
-            rightPoster(clicked_index);
-        } else if (clicked_index === 0) {
-            clicked_index = 9;
-            FlickrCall(retrieved[clicked_index].name);
-            albumInfo(clicked_index);
-            tableMaker(clicked_index);
-            rightPoster(clicked_index);
+            rotate(clicked_index);
+        } else if (sorted_index === undefined && clicked_index === 0) {
+            clicked_index = galleryLength - 1;
+            rotate(clicked_index);
+        } else if (clicked_index === undefined && sorted_index > 0) {
+            sorted_index -= 1;
+            rotate(sorted_index);
+        } else if (clicked_index === undefined && sorted_index === 0) {
+            sorted_index = galleryLength - 1;
+            rotate(sorted_index);
         }
     });
 
 
     $('.right-arrow').click(function(evt) {
         evt.stopPropagation();
-        if (clicked_index <= 8) {
+        var galleryLength = $('.gallery').children().length;
+        if (sorted_index === undefined && clicked_index <= galleryLength - 2) {
             clicked_index += 1;
-            FlickrCall(retrieved[clicked_index].name);
-            albumInfo(clicked_index);
-            tableMaker(clicked_index);
-            rightPoster(clicked_index);
-        } else if (clicked_index === 9) {
+            rotate(clicked_index);
+        } else if (sorted_index === undefined && clicked_index === galleryLength - 1) {
             clicked_index = 0;
-            FlickrCall(retrieved[clicked_index].name);
-            albumInfo(clicked_index);
-            tableMaker(clicked_index);
-            rightPoster(clicked_index);
+            rotate(clicked_index);
+        } else if (clicked_index === undefined && sorted_index <= galleryLength - 2) {
+            sorted_index += 1;
+            rotate(sorted_index);
+        } else if (clicked_index === undefined && sorted_index === galleryLength - 1) {
+            sorted_index = 0;
+            rotate(sorted_index);
         }
     });
+
+
+
+
+    // sorting
+
+
+    $('.date').click(function() {
+        //refressh the array of data
+        
+        newRetrived = [];
+        usableInfo(retrieved);
+
+        sortRetrieved();
+        gallerySortBuilt(newRetrived);
+
+        $('.covers').each(function(index) {
+            $(this).attr("data-created", index);
+        });
+
+
+    });
+
+
 
 
 
