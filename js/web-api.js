@@ -199,8 +199,8 @@ $(document).ready(function() {
         var attr = $(this).attr('data-created');
         if (typeof attr !== typeof undefined && attr !== false) {
             sorted_index = $(this).attr("data-created");
-            
-            
+
+
 
             flickrCall(newRetrived[sorted_index].name_album);
             albumInfo(sorted_index);
@@ -219,6 +219,7 @@ $(document).ready(function() {
 
         $('#overlay').addClass('open').css("display", "flex");
 
+
     }); // end album click
 
 
@@ -228,8 +229,8 @@ $(document).ready(function() {
     $('#overlay').click(function() {
 
         $('#overlay').removeClass('open');
-         clicked_index = undefined;
-    sorted_index = undefined;
+        clicked_index = undefined;
+        sorted_index = undefined;
 
 
     });
@@ -249,9 +250,11 @@ $(document).ready(function() {
             rotate(clicked_index);
         } else if (clicked_index === undefined && sorted_index > 0) {
             sorted_index -= 1;
+
             rotate(sorted_index);
         } else if (clicked_index === undefined && sorted_index === 0) {
             sorted_index = galleryLength - 1;
+
             rotate(sorted_index);
         }
     });
@@ -260,18 +263,26 @@ $(document).ready(function() {
     $('.right-arrow').click(function(evt) {
         evt.stopPropagation();
         var galleryLength = $('.gallery').children().length;
+
         if (sorted_index === undefined && clicked_index <= galleryLength - 2) {
             clicked_index += 1;
+
             rotate(clicked_index);
         } else if (sorted_index === undefined && clicked_index === galleryLength - 1) {
             clicked_index = 0;
             rotate(clicked_index);
-        } else if (clicked_index === undefined && sorted_index <= galleryLength - 2) {
+        } else if (clicked_index === undefined && sorted_index < galleryLength - 1) {
+            
+            sorted_index = Number(sorted_index);
             sorted_index += 1;
+         
             rotate(sorted_index);
+
         } else if (clicked_index === undefined && sorted_index === galleryLength - 1) {
             sorted_index = 0;
+
             rotate(sorted_index);
+
         }
     });
 
@@ -283,7 +294,7 @@ $(document).ready(function() {
 
     $('.date').click(function() {
         //refressh the array of data
-        
+
         newRetrived = [];
         usableInfo(retrieved);
 
