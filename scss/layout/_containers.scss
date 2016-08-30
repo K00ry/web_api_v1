@@ -63,8 +63,9 @@
         @include flex-display(flex, row, space-between, 100%);
         .flickr-photos {
             img {
-                width: 200px;
-                height: 200px;
+                width: 180px;
+                height: 180px;
+                border-radius:20px;
             }
         }
     }
@@ -107,4 +108,12 @@
             }
         }
     }
+}
+
+
+.sort{
+    display: none;
+    justify-content: space-between;
+    
+
 }

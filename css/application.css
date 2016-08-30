@@ -476,8 +476,9 @@ fieldset {
     justify-content: space-between;
     width: 100%; }
     .overlay-content .flickr-show .flickr-photos img {
-      width: 200px;
-      height: 200px; }
+      width: 180px;
+      height: 180px;
+      border-radius: 20px; }
   .overlay-content .content-holder {
     display: flex;
     flex-direction: row;
@@ -516,6 +517,10 @@ fieldset {
       border-bottom: 2px solid #fff;
       font-size: 1.1em;
       margin-bottom: 4px; }
+
+.sort {
+  display: none;
+  justify-content: space-between; }
 
 .left-arrow, .right-arrow {
   color: #fff;
