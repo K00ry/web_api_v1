@@ -17,31 +17,42 @@
                     <legend>search widget for flickr</legend>
                     <label for="search">Search through flickr</label>
                     <input id="flickr-search" type="text" name="search" placeholder="Search..." data-search>
-                    <button  id="flickr-submit" type="submit">Search...</button>
+                    <button id="flickr-submit" type="submit">Search...</button>
                 </fieldset>
             </form>
-           
+        </div>
+        <div class="sort">
+        <h3>sort by:</h3>
+        <button class="date">Release date</button>
+        <button class="name">Name</button>
+            
         </div>
         <div class="gallery">
+
         </div>
     </div>
     <div id="overlay" class="overlay overlay-contentscale">
-            <div class="overlay-content">
-            <img  class="overlay-poster" >
-                <div class="album-info">
+        <span class="left-arrow"><</span>
+        <div class="overlay-content">
+            <div class="flickr-show">
+                
+            </div>
+            <div class="content-holder">
+                <img class="overlay-poster">
+                <div class="table">
+                <table class="replace-table">
+                </table>
+                </div>
+            </div>
+            <div class="album-info">
                 <h1 class="artist"></h1>
                 <h2 class="album"></h2>
                 <h3 class="release"></h3>
-                <h3 class=""></h3>   
-                </div>
+                <h3 class=""></h3>
             </div>
-            <div class="table">
-                
-            </div>
-
-            <button type="button" class="overlay-close">Close</button>
-            
         </div>
+        <span class="right-arrow">></span>
+    </div>
     <script src="https://code.jquery.com/jquery-3.0.0.min.js" type="text/javascript"></script>
     <script src="js/web-api.js"></script>
 </body>

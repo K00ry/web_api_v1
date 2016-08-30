@@ -488,7 +488,7 @@ img {
 >>>>>>> spotify-test
   padding-top: 10px; }
 
-.photos img {
+.covers img {
   width: 220px;
   height: 220px;
   margin: 20px;
@@ -509,6 +509,7 @@ img {
   transition: transform 0.5s, visibility 0s 0.5s; }
 
 #overlay {
+  align-items: center;
   position: fixed;
   width: 100%;
   height: 100%;
@@ -519,9 +520,10 @@ img {
 .overlay-content {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 90%;
   margin: auto; }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> spotify-test
@@ -542,7 +544,26 @@ img {
 =======
   .overlay-content img {
     width: 50%;
+=======
+  .overlay-content .flickr-show {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%; }
+    .overlay-content .flickr-show .flickr-photos img {
+      width: 180px;
+      height: 180px;
+      border-radius: 20px; }
+  .overlay-content .content-holder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+>>>>>>> master
     height: 80%; }
+  .overlay-content img {
+    width: 400px;
+    height: 400px; }
   .overlay-content .album-info {
     display: flex;
     flex-direction: column;
@@ -561,8 +582,27 @@ img {
       .overlay-content .album-info h3 span {
         color: #7000CE; }
 
-.overlay-close {
-  display: none; }
+.table {
+  width: 50%; }
+  .table table {
+    width: 100%;
+    text-align: left; }
+    .table table tr td {
+      width: 100%;
+      color: yellow;
+      float: left;
+      border-bottom: 2px solid #fff;
+      font-size: 1.1em;
+      margin-bottom: 4px; }
+
+.sort {
+  display: none;
+  justify-content: space-between; }
+
+.left-arrow, .right-arrow {
+  color: #fff;
+  font-size: 4em;
+  width: 10%; }
 
 label {
   font-size: 2em;
