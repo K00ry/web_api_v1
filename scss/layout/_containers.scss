@@ -5,30 +5,12 @@
     .engines {
         @include flex-display(flex, row, space-around, 100%, center);
         padding-bottom: 20px;
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> spotify-test
-=======
->>>>>>> spotify-test
     }
 }
 
 .spotify {
     margin: auto;
-<<<<<<< HEAD
-    @include flex-display(flex, column, space-between, 80%, center);
-<<<<<<< HEAD
-<<<<<<< HEAD
-}
-
-.gallery{
-	 @include flex-display(flex, row, space-between, 100%, center);
-=======
-=======
     @include flex-display(flex, column, space-between, 100%, center);
->>>>>>> master
 }
 
 .gallery {
@@ -80,17 +62,6 @@
     background: $text-black-l;
 }
 
-<<<<<<< HEAD
-.overlay-content{
-	@include flex-display(flex, row, space-around, 80%, center);
-
-	margin:auto;
-
-
->>>>>>> spotify-test
-
-
-=======
 .overlay-content {
     @include flex-display(flex, column, space-around, 90%);
     background-color: #272727;
@@ -173,19 +144,41 @@
             @include flex-display(flex, column, space-around, 100%, flex-start);
         }
     }
->>>>>>> spotify-test
-}
-.photos{
-	@include flex-display(flex, row, space-around, 100%, center);
-	flex-wrap:wrap;
-	padding-top:20px;
-=======
 }
 
-.gallery {
-    @include flex-display(flex, row, space-around, 100%, center);
-    flex-wrap: wrap;
-    padding-top: 10px;
+.table {
+    display: none;
+    @include media(tablet) {
+        display: block;
+        max-height: 400px;
+        width: 50%;
+        padding: 0 10px;
+        table {
+            width: 100%;
+            text-align: left;
+            tr {
+                td {
+                    width: 100%;
+                    color: $highlight;
+                    float: left;
+                    border-bottom: 1px solid #fff;
+                    font-size: 1.1em;
+                    margin-bottom: 4px;
+                }
+            }
+        }
+    }
+}
+
+.sort {
+    display: none;
+    flex-direction:column;
+    justify-content: space-between;
+    margin: 20px auto;
+    h3 {
+        margin: 10px 6px;
+    }
+}
 }
 
 .photos {
