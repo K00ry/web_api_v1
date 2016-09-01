@@ -26,6 +26,7 @@ $(document).ready(function() {
 
 
         $.getJSON(spotify_url, spotifyOptions).done(function(data) {
+            $('.sort').css("display", "flex");
 
             $.each(data.albums.items, function(i, photo) {
                 if (photo.images.length > 0) {
@@ -96,7 +97,7 @@ $(document).ready(function() {
 =======
 >>>>>>> spotify-test
 
-        $('.sort').css("display", "flex");
+        
 
     }); // end submit
 
@@ -342,7 +343,8 @@ $(document).ready(function() {
 
     $('.date').click(function() {
         //refressh the array of data
-
+        if($(this).hasClass("active")===false){
+             $(this).addClass('active');
         newRetrived = [];
         usableInfo(retrieved);
 
@@ -352,6 +354,15 @@ $(document).ready(function() {
         $('.covers').each(function(index) {
             $(this).attr("data-created", index);
         });
+
+        } else if($(this).hasClass('active')===true){
+            $(this).removeClass('active');
+            newRetrived =[];
+            usableInfo(retrieved);
+            galleryBuilt(retrieved);
+
+        }
+       
 
 
     });
