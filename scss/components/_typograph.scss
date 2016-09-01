@@ -1,24 +1,52 @@
-
-label{
-	@include font-fam-size(2em,$main-font-2,bold,$light-blue);
-	margin:20px auto;
+label {
+    @include font-fam-size(3em, $main-font, bold, #1CA800);
+    margin: 20px auto;
+    text-shadow: 1px 2px 25px #1CA800;
+    opacity: 0.7;
 }
 
-input[name="search"]{
-	    border-radius: 40px;
-    width: 20%;
+input[name="search"] {
+    border: 2px solid #7EA87E;
+    border-radius: 40px;
+    width: 50%;
     height: 40px;
     margin: 20px auto;
-    transition:$trans-default;
+    transition: $trans-default;
     padding: 10px;
-
-    &:focus{
-    	width: 60%;
-    	outline: none;
+    @include font-fam-size(1em, $main-font-2, bold, #1CA800);
+    @include media(tablet) {
+        width: 30%;
     }
-
+    @include media(laptop) {
+        width: 40%;
+    }
+    &:focus {
+        box-shadow: 1px 2px 25px #1CA800;
+        width: 100%;
+        outline: none;
+        @include media(tablet) {
+            width: 70%;
+        }
+        @include media(laptop) {
+        width: 60%;
+    }
+    }
 }
-button{
-margin: auto;
 
+button {
+    margin: auto;
+}
+
+.overlay-content {
+    #flickr-h {
+        @include font-fam-size(1.4em, $main-font-2, bold, #fff);
+        margin: 10px auto;
+        .big-flickr {
+            @include font-fam-size(1.5em, $main-font-2, bold, $hard-blue);
+            text-shadow: 1px 2px 25px $hard-blue;
+        }
+        .album {
+            color: yellow;
+        }
+    }
 }
