@@ -224,15 +224,15 @@
 		"shouldRunBless": 0,
 		"useLibsass": 0
 		},
-	"\/scss\/features\/_variables.scss": {
+	"\/scss\/layout\/_containers.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/scss\/features\/_variables.scss",
-		"outputAbbreviatedPath": "\/scss\/css\/_variables.css",
+		"inputAbbreviatedPath": "\/scss\/layout\/_containers.scss",
+		"outputAbbreviatedPath": "\/scss\/css\/_containers.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 0,
