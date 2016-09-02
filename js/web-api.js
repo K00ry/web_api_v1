@@ -5,12 +5,7 @@ $(document).ready(function() {
     var retrieved = [];
     var newRetrived = [];
 
-
-
-
     $('#flickr-submit').click(function(evt) {
-
-        //////////////// spotify request\\\\\\\\\\\
         evt.preventDefault();
         $('.gallery').empty();
         retrieved = [];
@@ -42,44 +37,6 @@ $(document).ready(function() {
                 }
 
             }); // end each
-<<<<<<< HEAD
-
-            /////////////// twitter request \\\\\\\\\\\
-
-            var twitter_url = "https://search.twitter.com/search.json?";
-        var artist_tweets = $('#flickr-search').val().toLowerCase();
-        var twitterOptions = {
-            q: artist_tweets,
-            type: "json",
-            limit: limit
-        };
-            function displayTweets(data){
-                console.log(data)
-
-
-            }
-            $.getJSON(twitter_url,twitterOptions,displayTweets);
-
-
-
-
-
-
-
-            /// gallery build up
-            var photoHTML = '';
-            //for (i = 0; i < retrieved.length; i++) {
-            $.each(retrieved, function(index, value) {
-                photoHTML += '<div class="photos">';
-                photoHTML += '<img src="' + value.image + '" alt=" '+ value.name+' ">';
-                photoHTML += '</div>';
-            });
-            
-            $('.gallery').html(photoHTML);
-        }
-        console.log(retrieved);
-        $.getJSON(spotify_url, spotifyOptions, displayPhotos);
-=======
             //
             $('.covers').removeAttr('data-created');
 
@@ -90,12 +47,7 @@ $(document).ready(function() {
 
 
 
->>>>>>> master
 
-<<<<<<< HEAD
-    // click on pics to open the light gallery g
-=======
->>>>>>> spotify-test
 
         
 
