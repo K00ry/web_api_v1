@@ -1,29 +1,62 @@
 $(document).ready(function() {
 
 
-    var limit = 10;
-    var retrieved = [];
-    var newRetrived = [];
+ const limit = 10;
+    let retrieved = [];
+    let newRetrived = [];
 
-    $('#flickr-submit').click(function(evt) {
+
+
+
+
+// Get the hash of the url
+const hash = window.location.hash
+.substring(1)
+.split('&')
+.reduce(function (initial, item) {
+  if (item) {
+    var parts = item.split('=');
+    initial[parts[0]] = decodeURIComponent(parts[1]);
+  }
+  return initial;
+}, {});
+window.location.hash = '';
+
+// Set token
+let _token = hash.access_token;
+
+const authEndpoint = 'https://accounts.spotify.com/authorize';
+
+// Replace with your app's client ID, redirect URI and desired scopes
+const clientId = 'e8dbd39d940f44a0a5e37d114a917614';
+const redirectUri = 'https://k00ry.github.io/web_api_v1/';
+const scopes = [
+  'user-top-read'
+];
+
+// If there is no token, redirect to Spotify authorization
+if (!_token) {
+  window.location = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join('%20')}&response_type=token&show_dialog=true`;
+}
+
+// Make a call using the token
+
+$('#flickr-submit').click(function(evt) {
         evt.preventDefault();
         $('.gallery').empty();
         retrieved = [];
-        var artist = $('#flickr-search').val().split(" ").join("+");
-        var spotify_url = "https://api.spotify.com/v1/search";
-        var spotifyOptions = {
-            q: artist,
-            type: "album",
-            limit: limit
-        };
-
-
-
-
-        $.getJSON(spotify_url, spotifyOptions).done(function(data) {
-            $('.sort').css("display", "flex");
-
-            $.each(data.albums.items, function(i, photo) {
+$.ajax({
+   url: "https://api.spotify.com/v1/search",
+   type: "GET",
+   beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + _token );},
+   success: function(data) { 
+     // Do something with the returned data
+     // data.items.map(function(artist) {
+     //   let item = $('<li>' + artist.name + '</li>');
+     //   item.appendTo($('#top-artists'));
+     $('.sort').css("display", "flex");
+            console.log(data);
+       $.each(data.albums.items, function(i, photo) {
                 if (photo.images.length > 0) {
                     var bandInfo = {
                         "id": photo.id,
@@ -37,13 +70,66 @@ $(document).ready(function() {
                 }
 
             }); // end each
-            //
-            $('.covers').removeAttr('data-created');
+       $('.covers').removeAttr('data-created');
 
             galleryBuilt(retrieved);
+     }
+   });
+});
 
 
-        });
+
+
+
+
+
+
+
+
+    // var limit = 10;
+    // var retrieved = [];
+    // var newRetrived = [];
+// $('#flickr-submit').click(function(evt) {
+//     evt.preventDefault();
+//     $('.gallery').empty();
+//     retrieved = [];
+//     var artist = $('#flickr-search').val().split(" ").join("+");
+//     var spotify_url = "https://accounts.spotify.com/authorize/?response_type=code&scope=user-read-private%20user-read-email";
+//     var spotifyOptions = {
+//         // q: artist,
+//         // type: "album",
+//         // limit: limit,
+//         client_id: "e8dbd39d940f44a0a5e37d114a917614",
+//         redirect_uri: 'https://k00ry.github.io/web_api_v1/'
+//     };
+
+
+
+
+//     $.getJSON(spotify_url, spotifyOptions).done(function(data) {
+//         $('.sort').css("display", "flex");
+//         console.log(data);
+//         $.each(data.albums.items, function(i, photo) {
+//             if (photo.images.length > 0) {
+//                 var bandInfo = {
+//                     "id": photo.id,
+//                     "name": photo.name,
+//                     "href": photo.href,
+//                     "image": photo.images[0].url
+//                 };
+//                 retrieved.push(bandInfo);
+//                 fetchDetails(retrieved);
+
+//             }
+
+//         }); // end each
+//         //
+//         $('.covers').removeAttr('data-created');
+
+//         galleryBuilt(retrieved);
+
+
+//     });
 
 
 
@@ -51,7 +137,7 @@ $(document).ready(function() {
 
         
 
-    }); // end submit
+    // }); // end submit
 
 
 
